@@ -1,0 +1,146 @@
+/**
+ * Mixins
+ *
+ * @author magnify
+ */
+
+/* Breakpoints
+   ========================================================================== */
+
+$breakpoint-low:                  580px;
+$breakpoint-small:                480px;
+$breakpoint-medium:               768px;
+$breakpoint-large:                1024px;
+$breakpoint-x-large:              1280px;
+$breakpoint-xx-large:             1441px;
+$breakpoint-xxx-large:            1921px;
+
+/* Media query
+   ========================================================================== */
+
+@mixin respond-to($media) {
+  // Sizes
+  @if $media == small {
+    @media only screen and (max-width: $breakpoint-small) { @content; }
+  }
+
+  @else if $media == small-medium {
+    @media only screen and (max-width: $breakpoint-medium) { @content; }
+  }
+
+  @else if $media == from-small {
+    @media only screen and (min-width: $breakpoint-small + 1) { @content; }
+  }
+
+  @else if $media == small-medium-low {
+    @media only screen and (max-height: $breakpoint-low) and (max-width: $breakpoint-medium) { @content; }
+  }
+
+  @else if $media == medium {
+    @media only screen and (min-width: $breakpoint-small + 1) and (max-width: $breakpoint-medium) { @content; }
+  }
+
+  @else if $media == till-medium {
+    @media only screen and (max-width: $breakpoint-medium - 1) { @content; }
+  }
+
+  @else if $media == from-medium {
+    @media only screen and (min-width: $breakpoint-medium + 1) and (max-width: $breakpoint-x-large) { @content; }
+  }
+
+  @else if $media == medium-large {
+    @media only screen and (min-width: $breakpoint-medium) and (max-width: $breakpoint-large) { @content; }
+  }
+
+  @else if $media == large {
+    @media only screen and (min-width: $breakpoint-medium + 1) and (max-width: $breakpoint-large) { @content; }
+  }
+
+  @else if $media == till-large {
+    @media only screen and (max-width: $breakpoint-large) { @content; }
+  }
+
+  @else if $media == till-x-large {
+    @media only screen and (max-width: $breakpoint-x-large) { @content; }
+  }
+
+  @else if $media == large-x-large {
+    @media only screen and (min-width: $breakpoint-medium + 1) { @content; }
+  }
+
+  @else if $media == x-large {
+    @media only screen and (min-width: $breakpoint-x-large + 1) { @content; }
+  }
+
+  @else if $media == xx-large {
+    @media only screen and (min-width: $breakpoint-xx-large + 1) { @content; }
+  }
+  
+  @else if $media == xxx-large {
+    @media only screen and (min-width: $breakpoint-xxx-large + 1) { @content; }
+  }
+}
+
+
+/* Breakpoints
+   ========================================================================== */
+
+@mixin small {
+  @include respond-to(small) { @content; }
+}
+
+@mixin from-small {
+  @include respond-to(from-small) { @content; }
+}
+
+@mixin small-medium {
+  @include respond-to(small-medium) { @content; }
+}
+
+@mixin small-medium-low {
+  @include respond-to(small-medium-low) { @content; }
+}
+
+@mixin medium {
+  @include respond-to(medium) { @content; }
+}
+
+@mixin from-medium {
+  @include respond-to(from-medium) { @content; }
+}
+
+@mixin till-medium {
+  @include respond-to(till-medium) { @content; }
+}
+
+@mixin medium-large {
+  @include respond-to(medium-large) { @content; }
+}
+
+@mixin large {
+  @include respond-to(large) { @content; }
+}
+
+@mixin till-large {
+  @include respond-to(till-large) { @content; }
+}
+
+@mixin till-x-large {
+  @include respond-to(till-x-large) { @content; }
+}
+
+@mixin x-large {
+  @include respond-to(x-large) { @content; }
+}
+
+@mixin large-x-large {
+  @include respond-to(large-x-large) { @content; }
+}
+
+@mixin xx-large {
+  @include respond-to(xx-large) { @content; }
+}
+
+@mixin xxx-large {
+  @include respond-to(xxx-large) { @content; }
+}
