@@ -82,7 +82,6 @@ LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, t
   gradient.addEventListener("load", function() { gDf.resolve(this); });
   var canvas = document.createElement("canvas"), ctx = canvas.getContext('2d');
   var targetNew = $('<canvas/>',{'id':'target-x-large-0'}).prop({width: 1435, height: 521});
-
   var targetNewHtml = targetNew[0].outerHTML;
   var targerWrapper = "<div class=" + targetWrapperClass + ">" + targetNewHtml + "</div>";
 
@@ -93,10 +92,8 @@ LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, t
     var l = (bg.width / 2) - (mask.width / 2), t = (bg.height / 2) - (mask.height / 2);
     var imageRatio = bg.width/bg.height;
     var newImageHeight =  mask.width / imageRatio;
-    
     var headerHeight = $('.image-wrapper').height();
     var headerWidth = $('.image-wrapper').width();
-    
     var newImageWidth =  mask.height * imageRatio;
     var imageXPosition = (mask.width - newImageWidth);
     canvas.width = mask.width;
@@ -108,7 +105,6 @@ LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, t
     ctx.globalCompositeOperation = "source-in";
     ctx.drawImage(bg, imageXPosition, 0, newImageWidth, mask.height);
 
-    console.log(gradient);
     var imageData = ctx.getImageData(0, 0, mask.width, mask.height);                                       
     targetCtx.putImageData(imageData, 0, 0);
   });
