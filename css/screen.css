@@ -49,7 +49,8 @@ body {
   }
 }
 .custom-header .image-wrapper {
-  width: 80%;
+  width: 1435px;
+  max-width: 80%;
 }
 
 .typed-cursor {
@@ -266,7 +267,9 @@ body {
 }
 
 .mask-image {
-  display: none;
+  visibility: hidden;
+  width: 100%;
+  height: auto;
 }
 
 #target-x-large-0 {
@@ -657,10 +660,12 @@ body {
   [class^="text-overlay-"],
   [class*=" text-overlay-"] {
     top: 100px;
+    left: 516px;
   }
 
   .form-overlay {
     top: 180px;
+    left: 516px;
   }
 }
 @media only screen and (min-width: 1922px) {
@@ -673,8 +678,7 @@ body {
 
   .form-overlay {
     top: 195px;
-    left: inherit;
-    right: calc(20% + 320px);
+    left: 516px;
   }
 }
 @-webkit-keyframes typing {

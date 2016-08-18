@@ -8,15 +8,16 @@
 function LibrarySnippet() {
   this.maskSrcXL = "images/mask-xxl.png";
   this.bgSrc = "images/t.png";
+  this.gradientSrc = "images/g.png";
   this.targetObjLarge = document.getElementById("target-large");
-  this.slidesImages = ["images/indesign.jpg", "images/ulver.jpg", "images/vitenskapp.jpg", "images/sunn-mat.jpg", "images/klassisk-musikk.jpg", "images/bursdag.jpg"];
+  this.slidesImages = ["images/ulver.jpg", "images/vitenskapp.jpg", "images/sunn-mat.jpg", "images/klassisk-musikk.jpg", "images/bursdag.jpg"];
   this.targetId = 'target-x-large-0';
   this.targetWrapperClass = 'wr-target-x-large';
   this.slideTitle = "Biblioteksøk";
   
   this.itemImage = this.generateImageBg(this.slidesImages);
   if($('body').hasClass('custom-header')) {
-    this.createImageMask(this.maskSrcXL, this.itemImage, this.targetObjLarge, this.targetWrapperClass);
+    this.createImageMask(this.maskSrcXL, this.itemImage, this.targetObjLarge, this.targetWrapperClass, this.gradientSrc);
     this.fadeInBg(this.targetId);
   }
   this.setTitle(this.slideTitle);
@@ -61,9 +62,8 @@ LibrarySnippet.prototype.generateImageBg = function(obj) {
  */
 LibrarySnippet.prototype.setImageHeight = function() {
   if($('body').hasClass('custom-header')) {
-    var elementNewHeight = Math.round($(window).width()*0.8/2.75);
-    $('.image-wrapper').height(elementNewHeight - 1);
-    $('.image-wrapper #' + LibrarySnippet.targetId).height(elementNewHeight - 1);
+    var elementNewHeight = $('.mask-image').height();
+    $('.image-wrapper').height(elementNewHeight);
   }
 }
 
@@ -71,13 +71,15 @@ LibrarySnippet.prototype.setImageHeight = function() {
  * Creates canvas using mask png image and random image from array
  * Background image is set to 100% width and is centered verticaly
  */
-LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, targetWrapperClass) {
-  var mask = new Image(), bg = new Image();
-  var mDf = $.Deferred(), bgDf = $.Deferred();
+LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, targetWrapperClass, gradientSrc) {
+  var mask = new Image(), bg = new Image(), gradient = new Image();
+  var mDf = $.Deferred(), bgDf = $.Deferred(), gDf = $.Deferred();
   mask.src = maskSrc;
   bg.src = bgSrc;
+  gradient.src = gradientSrc;
   mask.addEventListener("load", function() { mDf.resolve(this); });
   bg.addEventListener("load", function() { bgDf.resolve(this); });
+  gradient.addEventListener("load", function() { gDf.resolve(this); });
   var canvas = document.createElement("canvas"), ctx = canvas.getContext('2d');
   var targetNew = $('<canvas/>',{'id':'target-x-large-0'}).prop({width: 1435, height: 521});
 
@@ -91,15 +93,24 @@ LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, t
     var l = (bg.width / 2) - (mask.width / 2), t = (bg.height / 2) - (mask.height / 2);
     var imageRatio = bg.width/bg.height;
     var newImageHeight =  mask.width / imageRatio;
-    
-    canvas.width = bg.width;
-    canvas.height = bg.height;
-    ctx.drawImage(mask, l, t, mask.width, mask.height);
+	
+    var headerHeight = $('.image-wrapper').height();
+	var headerWidth = $('.image-wrapper').width();
+	
+	var newImageWidth =  mask.height * imageRatio;
+    var imageXPosition = (mask.width - newImageWidth);
+    canvas.width = mask.width;
+    canvas.height = mask.height;
+
+    ctx.drawImage(mask, 0, 0, mask.width, mask.height);
     ctx.globalCompositeOperation = "source-in";
-    ctx.drawImage(bg, l, 0, mask.width, newImageHeight);
-    
-    var imageData = ctx.getImageData(l, t, mask.width, newImageHeight);                                       
-    targetCtx.putImageData(imageData, 0, 0);  
+	ctx.drawImage(gradient, imageXPosition, 0, gradient.width, gradient.height);
+	ctx.globalCompositeOperation = "source-in";
+    ctx.drawImage(bg, imageXPosition, 0, newImageWidth, mask.height);
+
+	console.log(gradient);
+    var imageData = ctx.getImageData(0, 0, mask.width, mask.height);                                       
+    targetCtx.putImageData(imageData, 0, 0);
   });
 }
 
