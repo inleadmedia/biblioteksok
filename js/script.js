@@ -10,7 +10,7 @@ function LibrarySnippet() {
   this.bgSrc = "images/t.png";
   this.gradientSrc = "images/g.png";
   this.targetObjLarge = document.getElementById("target-large");
-  this.slidesImages = ["images/ulver.jpg", "images/vitenskapp.jpg", "images/sunn-mat.jpg", "images/klassisk-musikk.jpg", "images/bursdag.jpg"];
+  this.slidesImages = ["images/indesign.jpg", "images/ulver.jpg", "images/vitenskapp.jpg", "images/sunn-mat.jpg", "images/klassisk-musikk.jpg", "images/bursdag.jpg"];
   this.targetId = 'target-x-large-0';
   this.targetWrapperClass = 'wr-target-x-large';
   this.slideTitle = "Biblioteksøk";
@@ -93,22 +93,22 @@ LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, t
     var l = (bg.width / 2) - (mask.width / 2), t = (bg.height / 2) - (mask.height / 2);
     var imageRatio = bg.width/bg.height;
     var newImageHeight =  mask.width / imageRatio;
-	
+    
     var headerHeight = $('.image-wrapper').height();
-	var headerWidth = $('.image-wrapper').width();
-	
-	var newImageWidth =  mask.height * imageRatio;
+    var headerWidth = $('.image-wrapper').width();
+    
+    var newImageWidth =  mask.height * imageRatio;
     var imageXPosition = (mask.width - newImageWidth);
     canvas.width = mask.width;
     canvas.height = mask.height;
 
     ctx.drawImage(mask, 0, 0, mask.width, mask.height);
     ctx.globalCompositeOperation = "source-in";
-	ctx.drawImage(gradient, imageXPosition, 0, gradient.width, gradient.height);
-	ctx.globalCompositeOperation = "source-in";
+    ctx.drawImage(gradient, imageXPosition, 0, gradient.width, gradient.height);
+    ctx.globalCompositeOperation = "source-in";
     ctx.drawImage(bg, imageXPosition, 0, newImageWidth, mask.height);
 
-	console.log(gradient);
+    console.log(gradient);
     var imageData = ctx.getImageData(0, 0, mask.width, mask.height);                                       
     targetCtx.putImageData(imageData, 0, 0);
   });
