@@ -10,7 +10,7 @@ function LibrarySnippet() {
   this.bgSrc = "images/t.png";
   this.gradientSrc = "images/g.png";
   this.targetObjLarge = document.getElementById("target-large");
-  this.slidesImages = ["images/indesign.jpg", "images/ulver.jpg", "images/vitenskapp.jpg", "images/sunn-mat.jpg", "images/klassisk-musikk.jpg", "images/bursdag.jpg"];
+  this.slidesImages = ["images/small.jpg", "images/indesign.jpg"];
   this.targetId = 'target-x-large-0';
   this.targetWrapperClass = 'wr-target-x-large';
   this.slideTitle = "Biblioteksøk";
@@ -88,7 +88,7 @@ LibrarySnippet.prototype.createImageMask = function(maskSrc, bgSrc, targetObj, t
   $(targerWrapper).insertAfter($('.image-bg'));
   var target = document.getElementById('target-x-large-0'), targetCtx = target.getContext('2d');
 
-  $.when(mDf, bgDf).done(function(){
+  $.when(mDf, bgDf, gDf).done(function(){
     var l = (bg.width / 2) - (mask.width / 2), t = (bg.height / 2) - (mask.height / 2);
     var imageRatio = bg.width/bg.height;
     var newImageHeight =  mask.width / imageRatio;
