@@ -7,7 +7,6 @@
  */
 function LibrarySnippet() {
   this.maskSrcXL = "images/mask-xxl.png";
-  this.bgSrc = "images/t.png";
   this.gradientSrc = "images/g.png";
   this.targetObjLarge = document.getElementById("target-large");
   this.slidesImages = ["images/small.jpg", "images/indesign.jpg"];
